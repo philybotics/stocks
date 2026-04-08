@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stock Details</title>
+
+<style>
+:root {
+  --gap-size: 32px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS',
+    Roboto, Ubuntu, sans-serif;
+  color: #000;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+}
+
+header, footer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: rgba(0,0,0,0.05);
+  gap: 12px;
+}
+
+header {
+  justify-content: space-between;
+  padding: 0 var(--gap-size);
+  gap: calc(var(--gap-size) * 2);
+  box-shadow: rgba(0,0,0,0.05) 0 2px 6px 0;
+}
+
+header #site-logo {
+  font-weight: 600;
+  font-size: 32px;
+  padding: 16px;
+  background: linear-gradient(90deg, #00bce5 0%, #2962ff 100%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+header input[type='search'] {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+footer {
+  flex-direction: column;
+  padding: calc(var(--gap-size)*0.5) var(--gap-size);
+  margin-top: var(--gap-size);
+  border-top: solid 2px rgba(0,0,0,0.1);
+  justify-content: center;
+  gap: 8px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
+}
+
+main {
+  display: grid;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 calc(var(--gap-size)*0.5);
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--gap-size);
+}
+
+#symbol-info,
+#advanced-chart,
+#company-profile,
+#fundamental-data {
+  grid-column: span 2;
+}
+
+#technical-analysis,
+#top-stories,
+#powered-by-tv {
+  grid-column: span 1;
+}
+
+#ticker-tape {
+  width: 100%;
+  margin-bottom: var(--gap-size);
+  padding: 16px;
+  background: rgba(0,0,0,0.075);
+  border-radius: 4px;
+}
+
+/* FIXED HEIGHTS (STABLE) */
+#advanced-chart { height: 500px; }
+#company-profile { height: 400px; }
+#fundamental-data { height: 550px; }
+
+/* RESPONSIVE TARGETS ONLY */
+#technical-analysis { height: 450px; }
+#top-stories { height: 425px; }
+
+#powered-by-tv {
+  display: flex;
+  background: #f8f9fd;
+  border: solid 1px #e0e3eb;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+#powered-by-tv a { color: #2962ff; }
+
+/* RESPONSIVE HEIGHT ADJUSTMENTS (ONLY TA + STORIES) */
+@media (max-width: 1024px) {
+  #technical-analysis { height: 400px; }
+  #top-stories { height: 375px; }
+}
+
+@media (max-width: 800px) {
+  main > section,
+  #technical-analysis,
+  #top-stories,
+  #powered-by-tv {
+    grid-column: span 2;
+  }
+
+  #technical-analysis {
+    height: auto;
+    min-height: 360px;
+  }
+
+  #top-stories {
+    height: auto;
+    min-height: 340px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+<!-- 1️⃣ TICKER TAPE -->
+<nav id="ticker-tape">
+<script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js"></script>
+<tv-ticker-tape
+symbols="NASDAQ:AAPL,NYSE:BRK.A,NASDAQ:TSLA,NASDAQ:NVDA,NASDAQ:MSFT,NASDAQ:GOOGL,NASDAQ:META,NASDAQ:AMZN,NASDAQ:AMD,NASDAQ:NFLX">
+</tv-ticker-tape>
+</nav>
+
+<main>
+
+<!-- SYMBOL INFO -->
+<section id="symbol-info">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+    {
+      "symbol": "NASDAQ:AAPL",
+      "width": "100%",
+      "locale": "en",
+      "colorTheme": "light",
+      "isTransparent": true
+    }
+    </script>
+  </div>
+</section>
+
+<!-- 2️⃣ ADVANCED REAL-TIME CHART (NEW WIDGET) -->
+<section id="advanced-chart">
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"><span class="blue-text">AAPL stock chart</span></a><span class="trademark"> by TradingView</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "allow_symbol_change": true,
+  "calendar": false,
+  "details": true,
+  "hide_side_toolbar": false,
+  "hide_top_toolbar": false,
+  "hide_legend": false,
+  "hide_volume": false,
+  "hotlist": true,
+  "interval": "D",
+  "locale": "en",
+  "save_image": true,
+  "style": "1",
+  "symbol": "NASDAQ:AAPL",
+  "theme": "light",
+  "timezone": "Etc/UTC",
+  "backgroundColor": "#ffffff",
+  "gridColor": "rgba(46, 46, 46, 0.06)",
+  "watchlist": [
+    "NASDAQ:AAPL",
+    "NYSE:BRK.A",
+    "NASDAQ:TSLA",
+    "NASDAQ:NVDA",
+    "NASDAQ:MSFT",
+    "NASDAQ:GOOGL",
+    "NASDAQ:META",
+    "NASDAQ:AMZN",
+    "NASDAQ:AMD",
+    "NASDAQ:NFLX"
+  ],
+  "withdateranges": true,
+  "compareSymbols": [
+    {
+      "symbol": "NYSE:BRK.A",
+      "position": "SameScale"
+    }
+  ],
+  "studies": [
+    "STD;Performance",
+    "STD;Technical%1Ratings"
+  ],
+  "autosize": true
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+</section>
+
+<!-- 3️⃣ STOCK HEATMAP -->
+<section id="company-profile">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget"></div>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+{
+  "dataSource": "SPX500",
+  "blockSize": "market_cap_basic",
+  "blockColor": "change",
+  "grouping": "sector",
+  "locale": "en",
+  "colorTheme": "light",
+  "width": "100%",
+  "height": "100%"
+}
+</script>
+</div>
+</section>
+
+<!-- 4️⃣ STOCK MARKET -->
+<section id="fundamental-data">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget"></div>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+{
+  "exchange": "US",
+  "locale": "en",
+  "colorTheme": "light",
+  "width": "100%",
+  "height": "100%"
+}
+</script>
+</div>
+</section>
+
+<!-- 5️⃣ TECHNICAL ANALYSIS -->
+<section id="technical-analysis">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget"></div>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+{
+  "symbol": "NASDAQ:AAPL",
+  "interval": "1m",
+  "displayMode": "multiple",
+  "locale": "en",
+  "colorTheme": "light"
+}
+</script>
+</div>
+</section>
+
+<!-- 6️⃣ TOP STORIES -->
+<section id="top-stories">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget"></div>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+{
+  "feedMode": "all_symbols",
+  "displayMode": "regular",
+  "locale": "en",
+  "colorTheme": "light",
+  "width": "100%",
+  "height": "100%"
+}
+</script>
+</div>
+</section>
+
+
+
+
+
+</main>
+
+<footer>
+<p>ASSEMBLED BY <a href="https://philybotics.taplink.ws">PHILYBOTICS™</a></p>
+  <p><a href="https://tradingview.com">©TRADINGVIEW</a></p>
+</footer>
+
+
+</body>
+</html>
